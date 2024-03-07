@@ -1,0 +1,476 @@
+2023-12-04 23:48:27,491 [INFO] core.trainer: {'data_root': './WebCaricature', 'image_size': 84, 'use_memory': False, 'augment': True, 'augment_times': 2, 'augment_times_query': 1, 'workers': 8, 'dataloader_num': 1, 'device_ids': 0, 'n_gpu': 1, 'seed': 2147483647, 'deterministic': True, 'port': 49102, 'log_name': None, 'log_level': 'info', 'log_interval': 100, 'log_paramerter': False, 'result_root': './results', 'save_interval': 50, 'save_part': ['emb_func'], 'tag': None, 'epoch': 10, 'test_epoch': 5, 'parallel_part': ['emb_func'], 'pretrain_path': './results/ADM-WebCaricature-resnet12-5-1-Dec-02-2023-13-55-09/checkpoints/emb_func_best.pth', 'resume': False, 'way_num': 5, 'shot_num': 1, 'query_num': 15, 'test_way': 5, 'test_shot': 1, 'test_query': 15, 'episode_size': 1, 'train_episode': 1000, 'test_episode': 1000, 'batch_size': 64, 'val_per_epoch': 1, 'optimizer': {'kwargs': {'lr': 5e-05, 'momentum': 0.9, 'nesterov': True, 'weight_decay': 5e-05}, 'name': 'SGD', 'other': None}, 'lr_scheduler': {'kwargs': {'gamma': 0.1, 'milestones': [5]}, 'name': 'MultiStepLR'}, 'warmup': 0, 'includes': ['headers/data.yaml', 'headers/device.yaml', 'headers/misc.yaml', 'headers/model.yaml', 'headers/optimizer.yaml', 'classifiers/ADM.yaml', 'backbones/Conv64F.yaml'], 'classifier': {'name': 'ADM', 'kwargs': {'n_k': 3}}, 'backbone': {'name': 'resnet12', 'kwargs': {'maxpool_last2': False, 'is_flatten': False}}, 'tb_scale': 1.0, 'rank': 0}
+2023-12-04 23:48:27,759 [INFO] core.trainer: ADM(
+  (emb_func): ResNet(
+    (layer1): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(3, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(160, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(160, 320, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(320, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(320, 640, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (avgpool): AvgPool2d(kernel_size=5, stride=1, padding=0)
+    (dropout): Dropout(p=0.0, inplace=False)
+  )
+  (adm_layer): ADMLayer(
+    (normLayer): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (fcLayer): Conv1d(1, 1, kernel_size=(2,), stride=(1,), dilation=(5,), bias=False)
+  )
+  (loss_func): CrossEntropyLoss()
+)
+2023-12-04 23:48:27,814 [INFO] core.trainer: Trainable params in the model: 12424342
+2023-12-04 23:48:27,816 [INFO] core.trainer: load pretraining emb_func from ./results/ADM-WebCaricature-resnet12-5-1-Dec-02-2023-13-55-09/checkpoints/emb_func_best.pth
+2023-12-04 23:48:33,712 [INFO] core.trainer: load 10336 train image with 200 label.
+2023-12-04 23:48:35,303 [INFO] core.trainer: load 1254 val image with 32 label.
+2023-12-04 23:48:35,912 [INFO] core.trainer: load 1254 test image with 32 label.
+2023-12-04 23:48:36,892 [INFO] core.trainer: SGD (
+Parameter Group 0
+    dampening: 0
+    initial_lr: 5e-05
+    lr: 5e-05
+    momentum: 0.9
+    nesterov: True
+    weight_decay: 5e-05
+)
+2023-12-04 23:48:36,905 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-04 23:48:36,910 [INFO] core.trainer: learning rate: [5e-05]
+2023-12-04 23:49:23,614 [INFO] core.trainer: Epoch-(0): [100/1000]	Time 0.423 (0.466)	Calc 0.353 (0.397)	Data 0.001 (0.001)	Loss 0.723 (0.755)	Acc@1 100.000 (99.600)
+2023-12-04 23:50:05,618 [INFO] core.trainer: Epoch-(0): [200/1000]	Time 0.417 (0.443)	Calc 0.346 (0.374)	Data 0.001 (0.001)	Loss 0.673 (0.715)	Acc@1 98.667 (99.513)
+2023-12-04 23:50:48,402 [INFO] core.trainer: Epoch-(0): [300/1000]	Time 0.421 (0.438)	Calc 0.350 (0.368)	Data 0.001 (0.001)	Loss 0.633 (0.677)	Acc@1 96.000 (99.507)
+2023-12-04 23:51:30,802 [INFO] core.trainer: Epoch-(0): [400/1000]	Time 0.415 (0.434)	Calc 0.345 (0.364)	Data 0.001 (0.001)	Loss 0.445 (0.646)	Acc@1 100.000 (99.527)
+2023-12-04 23:52:13,929 [INFO] core.trainer: Epoch-(0): [500/1000]	Time 0.439 (0.434)	Calc 0.368 (0.364)	Data 0.001 (0.001)	Loss 0.458 (0.616)	Acc@1 100.000 (99.499)
+2023-12-04 23:52:56,961 [INFO] core.trainer: Epoch-(0): [600/1000]	Time 0.424 (0.433)	Calc 0.353 (0.363)	Data 0.002 (0.001)	Loss 0.388 (0.589)	Acc@1 100.000 (99.522)
+2023-12-04 23:53:39,682 [INFO] core.trainer: Epoch-(0): [700/1000]	Time 0.431 (0.432)	Calc 0.360 (0.362)	Data 0.001 (0.001)	Loss 0.375 (0.565)	Acc@1 100.000 (99.541)
+2023-12-04 23:54:23,510 [INFO] core.trainer: Epoch-(0): [800/1000]	Time 0.413 (0.433)	Calc 0.343 (0.363)	Data 0.001 (0.001)	Loss 0.422 (0.544)	Acc@1 100.000 (99.532)
+2023-12-04 23:55:05,717 [INFO] core.trainer: Epoch-(0): [900/1000]	Time 0.543 (0.432)	Calc 0.472 (0.362)	Data 0.001 (0.001)	Loss 0.315 (0.524)	Acc@1 100.000 (99.538)
+2023-12-04 23:55:54,185 [INFO] core.trainer: Epoch-(0): [1000/1000]	Time 0.473 (0.437)	Calc 0.403 (0.367)	Data 0.001 (0.001)	Loss 0.274 (0.506)	Acc@1 100.000 (99.551)
+2023-12-04 23:55:54,190 [INFO] core.trainer:  * Acc@1 99.551 
+2023-12-04 23:55:54,192 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-04 23:56:02,256 [INFO] core.trainer: Epoch-(0): [100/1000]	Time 0.086 (0.080)	Calc 0.083 (0.077)	Data 0.001 (0.001)	Acc@1 77.333 (83.707)
+2023-12-04 23:56:10,424 [INFO] core.trainer: Epoch-(0): [200/1000]	Time 0.082 (0.081)	Calc 0.080 (0.077)	Data 0.001 (0.001)	Acc@1 77.333 (83.507)
+2023-12-04 23:56:18,712 [INFO] core.trainer: Epoch-(0): [300/1000]	Time 0.082 (0.081)	Calc 0.078 (0.078)	Data 0.001 (0.001)	Acc@1 97.333 (83.938)
+2023-12-04 23:56:26,877 [INFO] core.trainer: Epoch-(0): [400/1000]	Time 0.080 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 93.333 (84.210)
+2023-12-04 23:56:34,985 [INFO] core.trainer: Epoch-(0): [500/1000]	Time 0.077 (0.081)	Calc 0.075 (0.078)	Data 0.001 (0.001)	Acc@1 94.667 (84.235)
+2023-12-04 23:56:43,117 [INFO] core.trainer: Epoch-(0): [600/1000]	Time 0.081 (0.081)	Calc 0.078 (0.078)	Data 0.001 (0.001)	Acc@1 100.000 (84.296)
+2023-12-04 23:56:51,221 [INFO] core.trainer: Epoch-(0): [700/1000]	Time 0.080 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 98.667 (84.669)
+2023-12-04 23:56:59,477 [INFO] core.trainer: Epoch-(0): [800/1000]	Time 0.081 (0.081)	Calc 0.078 (0.078)	Data 0.001 (0.001)	Acc@1 81.333 (84.683)
+2023-12-04 23:57:07,722 [INFO] core.trainer: Epoch-(0): [900/1000]	Time 0.083 (0.081)	Calc 0.078 (0.078)	Data 0.003 (0.001)	Acc@1 86.667 (84.639)
+2023-12-04 23:57:15,878 [INFO] core.trainer: Epoch-(0): [1000/1000]	Time 0.083 (0.081)	Calc 0.079 (0.078)	Data 0.001 (0.001)	Acc@1 84.000 (84.523)
+2023-12-04 23:57:15,882 [INFO] core.trainer:  * Acc@1 84.523 Best acc -inf
+2023-12-04 23:57:15,884 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-04 23:57:24,255 [INFO] core.trainer: Epoch-(0): [100/1000]	Time 0.080 (0.083)	Calc 0.077 (0.079)	Data 0.001 (0.001)	Acc@1 61.333 (82.933)
+2023-12-04 23:57:32,407 [INFO] core.trainer: Epoch-(0): [200/1000]	Time 0.083 (0.082)	Calc 0.077 (0.079)	Data 0.003 (0.001)	Acc@1 86.667 (83.040)
+2023-12-04 23:57:40,573 [INFO] core.trainer: Epoch-(0): [300/1000]	Time 0.083 (0.082)	Calc 0.079 (0.078)	Data 0.001 (0.001)	Acc@1 88.000 (83.609)
+2023-12-04 23:57:48,743 [INFO] core.trainer: Epoch-(0): [400/1000]	Time 0.082 (0.082)	Calc 0.079 (0.078)	Data 0.001 (0.001)	Acc@1 70.667 (84.113)
+2023-12-04 23:57:57,073 [INFO] core.trainer: Epoch-(0): [500/1000]	Time 0.080 (0.082)	Calc 0.077 (0.079)	Data 0.001 (0.001)	Acc@1 88.000 (84.229)
+2023-12-04 23:58:05,231 [INFO] core.trainer: Epoch-(0): [600/1000]	Time 0.082 (0.082)	Calc 0.079 (0.078)	Data 0.000 (0.001)	Acc@1 92.000 (84.260)
+2023-12-04 23:58:13,539 [INFO] core.trainer: Epoch-(0): [700/1000]	Time 0.081 (0.082)	Calc 0.079 (0.079)	Data 0.001 (0.001)	Acc@1 90.667 (84.455)
+2023-12-04 23:58:22,531 [INFO] core.trainer: Epoch-(0): [800/1000]	Time 0.091 (0.083)	Calc 0.087 (0.079)	Data 0.001 (0.001)	Acc@1 89.333 (84.308)
+2023-12-04 23:58:30,880 [INFO] core.trainer: Epoch-(0): [900/1000]	Time 0.081 (0.083)	Calc 0.078 (0.079)	Data 0.001 (0.001)	Acc@1 92.000 (84.381)
+2023-12-04 23:58:38,931 [INFO] core.trainer: Epoch-(0): [1000/1000]	Time 0.086 (0.082)	Calc 0.081 (0.079)	Data 0.001 (0.001)	Acc@1 86.667 (84.449)
+2023-12-04 23:58:38,935 [INFO] core.trainer:  * Acc@1 84.449 Best acc -inf
+2023-12-04 23:58:38,937 [INFO] core.trainer:  * Time: 0:10:02/1:40:20
+2023-12-04 23:58:39,372 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-04 23:58:39,374 [INFO] core.trainer: learning rate: [5e-05]
+2023-12-04 23:59:24,313 [INFO] core.trainer: Epoch-(1): [100/1000]	Time 0.426 (0.449)	Calc 0.355 (0.379)	Data 0.001 (0.001)	Loss 0.325 (0.317)	Acc@1 98.667 (99.707)
+2023-12-05 00:00:10,808 [INFO] core.trainer: Epoch-(1): [200/1000]	Time 0.467 (0.457)	Calc 0.398 (0.387)	Data 0.001 (0.001)	Loss 0.338 (0.314)	Acc@1 100.000 (99.620)
+2023-12-05 00:00:58,147 [INFO] core.trainer: Epoch-(1): [300/1000]	Time 0.478 (0.462)	Calc 0.408 (0.392)	Data 0.001 (0.001)	Loss 0.263 (0.304)	Acc@1 100.000 (99.653)
+2023-12-05 00:01:47,828 [INFO] core.trainer: Epoch-(1): [400/1000]	Time 0.467 (0.471)	Calc 0.398 (0.401)	Data 0.001 (0.001)	Loss 0.312 (0.296)	Acc@1 100.000 (99.670)
+2023-12-05 00:02:35,527 [INFO] core.trainer: Epoch-(1): [500/1000]	Time 0.490 (0.472)	Calc 0.419 (0.402)	Data 0.001 (0.001)	Loss 0.252 (0.289)	Acc@1 100.000 (99.672)
+2023-12-05 00:03:20,876 [INFO] core.trainer: Epoch-(1): [600/1000]	Time 0.474 (0.469)	Calc 0.406 (0.399)	Data 0.001 (0.001)	Loss 0.274 (0.281)	Acc@1 100.000 (99.687)
+2023-12-05 00:04:05,411 [INFO] core.trainer: Epoch-(1): [700/1000]	Time 0.468 (0.465)	Calc 0.398 (0.396)	Data 0.001 (0.001)	Loss 0.267 (0.274)	Acc@1 97.333 (99.670)
+2023-12-05 00:04:53,327 [INFO] core.trainer: Epoch-(1): [800/1000]	Time 0.473 (0.467)	Calc 0.402 (0.397)	Data 0.001 (0.001)	Loss 0.178 (0.269)	Acc@1 100.000 (99.670)
+2023-12-05 00:05:43,236 [INFO] core.trainer: Epoch-(1): [900/1000]	Time 0.482 (0.470)	Calc 0.411 (0.401)	Data 0.001 (0.001)	Loss 0.304 (0.263)	Acc@1 100.000 (99.683)
+2023-12-05 00:06:30,048 [INFO] core.trainer: Epoch-(1): [1000/1000]	Time 0.488 (0.470)	Calc 0.418 (0.401)	Data 0.001 (0.001)	Loss 0.209 (0.258)	Acc@1 100.000 (99.684)
+2023-12-05 00:06:30,053 [INFO] core.trainer:  * Acc@1 99.684 
+2023-12-05 00:06:30,055 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 00:06:38,109 [INFO] core.trainer: Epoch-(1): [100/1000]	Time 0.085 (0.080)	Calc 0.082 (0.077)	Data 0.001 (0.001)	Acc@1 82.667 (84.987)
+2023-12-05 00:06:46,168 [INFO] core.trainer: Epoch-(1): [200/1000]	Time 0.084 (0.080)	Calc 0.081 (0.077)	Data 0.001 (0.001)	Acc@1 94.667 (84.773)
+2023-12-05 00:06:54,139 [INFO] core.trainer: Epoch-(1): [300/1000]	Time 0.080 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 97.333 (84.591)
+2023-12-05 00:07:02,217 [INFO] core.trainer: Epoch-(1): [400/1000]	Time 0.081 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 84.000 (84.920)
+2023-12-05 00:07:10,159 [INFO] core.trainer: Epoch-(1): [500/1000]	Time 0.081 (0.080)	Calc 0.077 (0.076)	Data 0.001 (0.001)	Acc@1 76.000 (84.848)
+2023-12-05 00:07:18,163 [INFO] core.trainer: Epoch-(1): [600/1000]	Time 0.075 (0.080)	Calc 0.073 (0.076)	Data 0.001 (0.001)	Acc@1 92.000 (84.704)
+2023-12-05 00:07:26,175 [INFO] core.trainer: Epoch-(1): [700/1000]	Time 0.076 (0.080)	Calc 0.073 (0.076)	Data 0.001 (0.001)	Acc@1 73.333 (84.594)
+2023-12-05 00:07:34,210 [INFO] core.trainer: Epoch-(1): [800/1000]	Time 0.079 (0.080)	Calc 0.076 (0.076)	Data 0.001 (0.001)	Acc@1 92.000 (84.732)
+2023-12-05 00:07:42,284 [INFO] core.trainer: Epoch-(1): [900/1000]	Time 0.076 (0.080)	Calc 0.073 (0.076)	Data 0.001 (0.001)	Acc@1 93.333 (84.761)
+2023-12-05 00:07:50,363 [INFO] core.trainer: Epoch-(1): [1000/1000]	Time 0.082 (0.080)	Calc 0.079 (0.076)	Data 0.001 (0.001)	Acc@1 90.667 (84.885)
+2023-12-05 00:07:50,367 [INFO] core.trainer:  * Acc@1 84.885 Best acc 84.523
+2023-12-05 00:07:50,369 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 00:07:58,435 [INFO] core.trainer: Epoch-(1): [100/1000]	Time 0.080 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 96.000 (84.853)
+2023-12-05 00:08:06,483 [INFO] core.trainer: Epoch-(1): [200/1000]	Time 0.084 (0.080)	Calc 0.081 (0.077)	Data 0.001 (0.001)	Acc@1 81.333 (84.940)
+2023-12-05 00:08:14,553 [INFO] core.trainer: Epoch-(1): [300/1000]	Time 0.081 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (85.413)
+2023-12-05 00:08:22,661 [INFO] core.trainer: Epoch-(1): [400/1000]	Time 0.073 (0.080)	Calc 0.070 (0.077)	Data 0.001 (0.001)	Acc@1 85.333 (85.320)
+2023-12-05 00:08:30,712 [INFO] core.trainer: Epoch-(1): [500/1000]	Time 0.079 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 77.333 (85.083)
+2023-12-05 00:08:38,775 [INFO] core.trainer: Epoch-(1): [600/1000]	Time 0.077 (0.080)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 92.000 (84.993)
+2023-12-05 00:08:46,873 [INFO] core.trainer: Epoch-(1): [700/1000]	Time 0.079 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 82.667 (85.000)
+2023-12-05 00:08:54,992 [INFO] core.trainer: Epoch-(1): [800/1000]	Time 0.078 (0.080)	Calc 0.075 (0.077)	Data 0.002 (0.001)	Acc@1 90.667 (85.028)
+2023-12-05 00:09:03,061 [INFO] core.trainer: Epoch-(1): [900/1000]	Time 0.076 (0.080)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 77.333 (84.990)
+2023-12-05 00:09:11,121 [INFO] core.trainer: Epoch-(1): [1000/1000]	Time 0.079 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 72.000 (84.943)
+2023-12-05 00:09:11,125 [INFO] core.trainer:  * Acc@1 84.943 Best acc 84.449
+2023-12-05 00:09:11,127 [INFO] core.trainer:  * Time: 0:20:34/1:42:50
+2023-12-05 00:09:11,637 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 00:09:11,639 [INFO] core.trainer: learning rate: [5e-05]
+2023-12-05 00:09:58,700 [INFO] core.trainer: Epoch-(2): [100/1000]	Time 0.479 (0.470)	Calc 0.410 (0.400)	Data 0.001 (0.001)	Loss 0.280 (0.199)	Acc@1 96.000 (99.747)
+2023-12-05 00:10:45,253 [INFO] core.trainer: Epoch-(2): [200/1000]	Time 0.417 (0.467)	Calc 0.346 (0.397)	Data 0.001 (0.001)	Loss 0.166 (0.195)	Acc@1 100.000 (99.740)
+2023-12-05 00:11:28,962 [INFO] core.trainer: Epoch-(2): [300/1000]	Time 0.416 (0.457)	Calc 0.346 (0.387)	Data 0.001 (0.001)	Loss 0.213 (0.192)	Acc@1 100.000 (99.711)
+2023-12-05 00:12:15,210 [INFO] core.trainer: Epoch-(2): [400/1000]	Time 0.460 (0.458)	Calc 0.390 (0.388)	Data 0.001 (0.001)	Loss 0.185 (0.188)	Acc@1 100.000 (99.703)
+2023-12-05 00:13:02,477 [INFO] core.trainer: Epoch-(2): [500/1000]	Time 0.478 (0.461)	Calc 0.408 (0.391)	Data 0.001 (0.001)	Loss 0.116 (0.185)	Acc@1 100.000 (99.712)
+2023-12-05 00:13:48,592 [INFO] core.trainer: Epoch-(2): [600/1000]	Time 0.423 (0.461)	Calc 0.354 (0.391)	Data 0.001 (0.001)	Loss 0.181 (0.182)	Acc@1 100.000 (99.709)
+2023-12-05 00:14:33,799 [INFO] core.trainer: Epoch-(2): [700/1000]	Time 0.484 (0.460)	Calc 0.415 (0.390)	Data 0.001 (0.001)	Loss 0.207 (0.180)	Acc@1 100.000 (99.707)
+2023-12-05 00:15:19,629 [INFO] core.trainer: Epoch-(2): [800/1000]	Time 0.421 (0.459)	Calc 0.349 (0.389)	Data 0.001 (0.001)	Loss 0.124 (0.177)	Acc@1 100.000 (99.683)
+2023-12-05 00:16:03,997 [INFO] core.trainer: Epoch-(2): [900/1000]	Time 0.495 (0.458)	Calc 0.425 (0.388)	Data 0.001 (0.001)	Loss 0.111 (0.175)	Acc@1 100.000 (99.680)
+2023-12-05 00:16:47,829 [INFO] core.trainer: Epoch-(2): [1000/1000]	Time 0.422 (0.456)	Calc 0.352 (0.386)	Data 0.001 (0.001)	Loss 0.162 (0.173)	Acc@1 100.000 (99.672)
+2023-12-05 00:16:47,833 [INFO] core.trainer:  * Acc@1 99.672 
+2023-12-05 00:16:47,835 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 00:16:55,753 [INFO] core.trainer: Epoch-(2): [100/1000]	Time 0.076 (0.079)	Calc 0.073 (0.076)	Data 0.001 (0.001)	Acc@1 96.000 (84.480)
+2023-12-05 00:17:03,864 [INFO] core.trainer: Epoch-(2): [200/1000]	Time 0.083 (0.080)	Calc 0.080 (0.076)	Data 0.001 (0.001)	Acc@1 74.667 (84.180)
+2023-12-05 00:17:12,192 [INFO] core.trainer: Epoch-(2): [300/1000]	Time 0.078 (0.081)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 70.667 (84.151)
+2023-12-05 00:17:20,373 [INFO] core.trainer: Epoch-(2): [400/1000]	Time 0.082 (0.081)	Calc 0.078 (0.077)	Data 0.002 (0.001)	Acc@1 97.333 (84.137)
+2023-12-05 00:17:28,490 [INFO] core.trainer: Epoch-(2): [500/1000]	Time 0.078 (0.081)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 77.333 (83.915)
+2023-12-05 00:17:36,569 [INFO] core.trainer: Epoch-(2): [600/1000]	Time 0.083 (0.081)	Calc 0.079 (0.077)	Data 0.002 (0.001)	Acc@1 85.333 (84.116)
+2023-12-05 00:17:44,607 [INFO] core.trainer: Epoch-(2): [700/1000]	Time 0.078 (0.081)	Calc 0.074 (0.077)	Data 0.002 (0.001)	Acc@1 82.667 (84.150)
+2023-12-05 00:17:52,698 [INFO] core.trainer: Epoch-(2): [800/1000]	Time 0.078 (0.080)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 86.667 (84.230)
+2023-12-05 00:18:00,753 [INFO] core.trainer: Epoch-(2): [900/1000]	Time 0.081 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 96.000 (84.281)
+2023-12-05 00:18:08,631 [INFO] core.trainer: Epoch-(2): [1000/1000]	Time 0.074 (0.080)	Calc 0.071 (0.077)	Data 0.001 (0.001)	Acc@1 69.333 (84.223)
+2023-12-05 00:18:08,634 [INFO] core.trainer:  * Acc@1 84.223 Best acc 84.885
+2023-12-05 00:18:08,635 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 00:18:16,683 [INFO] core.trainer: Epoch-(2): [100/1000]	Time 0.074 (0.080)	Calc 0.071 (0.077)	Data 0.001 (0.001)	Acc@1 84.000 (83.280)
+2023-12-05 00:18:24,773 [INFO] core.trainer: Epoch-(2): [200/1000]	Time 0.082 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 89.333 (84.567)
+2023-12-05 00:18:32,894 [INFO] core.trainer: Epoch-(2): [300/1000]	Time 0.079 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (84.764)
+2023-12-05 00:18:41,103 [INFO] core.trainer: Epoch-(2): [400/1000]	Time 0.083 (0.081)	Calc 0.079 (0.077)	Data 0.001 (0.001)	Acc@1 96.000 (84.727)
+2023-12-05 00:18:49,273 [INFO] core.trainer: Epoch-(2): [500/1000]	Time 0.082 (0.081)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 96.000 (84.955)
+2023-12-05 00:18:57,418 [INFO] core.trainer: Epoch-(2): [600/1000]	Time 0.079 (0.081)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 80.000 (84.778)
+2023-12-05 00:19:05,563 [INFO] core.trainer: Epoch-(2): [700/1000]	Time 0.083 (0.081)	Calc 0.079 (0.077)	Data 0.001 (0.001)	Acc@1 86.667 (84.644)
+2023-12-05 00:19:13,690 [INFO] core.trainer: Epoch-(2): [800/1000]	Time 0.083 (0.081)	Calc 0.080 (0.077)	Data 0.001 (0.001)	Acc@1 98.667 (84.752)
+2023-12-05 00:19:21,854 [INFO] core.trainer: Epoch-(2): [900/1000]	Time 0.078 (0.081)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (84.951)
+2023-12-05 00:19:30,043 [INFO] core.trainer: Epoch-(2): [1000/1000]	Time 0.080 (0.081)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 60.000 (84.916)
+2023-12-05 00:19:30,047 [INFO] core.trainer:  * Acc@1 84.916 Best acc 84.943
+2023-12-05 00:19:30,049 [INFO] core.trainer:  * Time: 0:30:53/1:42:56.666667
+2023-12-05 00:19:30,408 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 00:19:30,410 [INFO] core.trainer: learning rate: [5e-05]
+2023-12-05 00:20:17,391 [INFO] core.trainer: Epoch-(3): [100/1000]	Time 0.497 (0.469)	Calc 0.429 (0.400)	Data 0.002 (0.001)	Loss 0.116 (0.142)	Acc@1 100.000 (99.827)
+2023-12-05 00:21:04,371 [INFO] core.trainer: Epoch-(3): [200/1000]	Time 0.480 (0.469)	Calc 0.410 (0.400)	Data 0.001 (0.001)	Loss 0.130 (0.139)	Acc@1 100.000 (99.853)
+2023-12-05 00:21:52,280 [INFO] core.trainer: Epoch-(3): [300/1000]	Time 0.469 (0.472)	Calc 0.401 (0.403)	Data 0.001 (0.001)	Loss 0.139 (0.138)	Acc@1 100.000 (99.809)
+2023-12-05 00:22:38,269 [INFO] core.trainer: Epoch-(3): [400/1000]	Time 0.466 (0.469)	Calc 0.396 (0.399)	Data 0.001 (0.001)	Loss 0.125 (0.137)	Acc@1 100.000 (99.760)
+2023-12-05 00:23:25,805 [INFO] core.trainer: Epoch-(3): [500/1000]	Time 0.478 (0.470)	Calc 0.408 (0.400)	Data 0.001 (0.001)	Loss 0.131 (0.138)	Acc@1 100.000 (99.720)
+2023-12-05 00:24:12,386 [INFO] core.trainer: Epoch-(3): [600/1000]	Time 0.465 (0.469)	Calc 0.394 (0.400)	Data 0.001 (0.001)	Loss 0.106 (0.137)	Acc@1 100.000 (99.731)
+2023-12-05 00:25:00,871 [INFO] core.trainer: Epoch-(3): [700/1000]	Time 0.479 (0.471)	Calc 0.410 (0.402)	Data 0.001 (0.001)	Loss 0.129 (0.135)	Acc@1 100.000 (99.726)
+2023-12-05 00:25:46,234 [INFO] core.trainer: Epoch-(3): [800/1000]	Time 0.433 (0.469)	Calc 0.364 (0.399)	Data 0.001 (0.001)	Loss 0.167 (0.134)	Acc@1 100.000 (99.732)
+2023-12-05 00:26:32,998 [INFO] core.trainer: Epoch-(3): [900/1000]	Time 0.466 (0.469)	Calc 0.395 (0.399)	Data 0.002 (0.001)	Loss 0.094 (0.133)	Acc@1 100.000 (99.719)
+2023-12-05 00:27:20,891 [INFO] core.trainer: Epoch-(3): [1000/1000]	Time 0.469 (0.470)	Calc 0.399 (0.400)	Data 0.001 (0.001)	Loss 0.271 (0.132)	Acc@1 98.667 (99.703)
+2023-12-05 00:27:20,896 [INFO] core.trainer:  * Acc@1 99.703 
+2023-12-05 00:27:20,898 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 00:27:28,972 [INFO] core.trainer: Epoch-(3): [100/1000]	Time 0.082 (0.080)	Calc 0.079 (0.077)	Data 0.001 (0.001)	Acc@1 82.667 (86.213)
+2023-12-05 00:27:36,979 [INFO] core.trainer: Epoch-(3): [200/1000]	Time 0.084 (0.080)	Calc 0.081 (0.077)	Data 0.001 (0.001)	Acc@1 81.333 (85.433)
+2023-12-05 00:27:45,013 [INFO] core.trainer: Epoch-(3): [300/1000]	Time 0.079 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 81.333 (85.324)
+2023-12-05 00:27:53,065 [INFO] core.trainer: Epoch-(3): [400/1000]	Time 0.080 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 96.000 (85.140)
+2023-12-05 00:28:01,168 [INFO] core.trainer: Epoch-(3): [500/1000]	Time 0.081 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (85.096)
+2023-12-05 00:28:09,346 [INFO] core.trainer: Epoch-(3): [600/1000]	Time 0.079 (0.080)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (85.244)
+2023-12-05 00:28:17,549 [INFO] core.trainer: Epoch-(3): [700/1000]	Time 0.077 (0.080)	Calc 0.073 (0.077)	Data 0.001 (0.001)	Acc@1 89.333 (85.253)
+2023-12-05 00:28:25,678 [INFO] core.trainer: Epoch-(3): [800/1000]	Time 0.080 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 65.333 (85.120)
+2023-12-05 00:28:33,829 [INFO] core.trainer: Epoch-(3): [900/1000]	Time 0.082 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 81.333 (85.105)
+2023-12-05 00:28:42,031 [INFO] core.trainer: Epoch-(3): [1000/1000]	Time 0.079 (0.081)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 77.333 (85.025)
+2023-12-05 00:28:42,036 [INFO] core.trainer:  * Acc@1 85.025 Best acc 84.885
+2023-12-05 00:28:42,038 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 00:28:50,166 [INFO] core.trainer: Epoch-(3): [100/1000]	Time 0.082 (0.081)	Calc 0.079 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (83.840)
+2023-12-05 00:28:58,317 [INFO] core.trainer: Epoch-(3): [200/1000]	Time 0.083 (0.081)	Calc 0.079 (0.077)	Data 0.001 (0.001)	Acc@1 100.000 (83.733)
+2023-12-05 00:29:06,522 [INFO] core.trainer: Epoch-(3): [300/1000]	Time 0.080 (0.081)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 86.667 (83.942)
+2023-12-05 00:29:14,701 [INFO] core.trainer: Epoch-(3): [400/1000]	Time 0.082 (0.081)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 90.667 (83.927)
+2023-12-05 00:29:22,815 [INFO] core.trainer: Epoch-(3): [500/1000]	Time 0.077 (0.081)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 100.000 (84.336)
+2023-12-05 00:29:31,023 [INFO] core.trainer: Epoch-(3): [600/1000]	Time 0.078 (0.081)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 70.667 (84.209)
+2023-12-05 00:29:39,179 [INFO] core.trainer: Epoch-(3): [700/1000]	Time 0.081 (0.081)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 66.667 (84.126)
+2023-12-05 00:29:47,254 [INFO] core.trainer: Epoch-(3): [800/1000]	Time 0.080 (0.081)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 92.000 (84.433)
+2023-12-05 00:29:55,291 [INFO] core.trainer: Epoch-(3): [900/1000]	Time 0.084 (0.081)	Calc 0.077 (0.077)	Data 0.005 (0.001)	Acc@1 88.000 (84.501)
+2023-12-05 00:30:03,413 [INFO] core.trainer: Epoch-(3): [1000/1000]	Time 0.079 (0.081)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 82.667 (84.437)
+2023-12-05 00:30:03,418 [INFO] core.trainer:  * Acc@1 84.437 Best acc 84.943
+2023-12-05 00:30:03,420 [INFO] core.trainer:  * Time: 0:41:26/1:43:35
+2023-12-05 00:30:04,072 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 00:30:04,075 [INFO] core.trainer: learning rate: [5e-05]
+2023-12-05 00:30:55,766 [INFO] core.trainer: Epoch-(4): [100/1000]	Time 0.519 (0.516)	Calc 0.452 (0.448)	Data 0.001 (0.001)	Loss 0.090 (0.119)	Acc@1 100.000 (99.760)
+2023-12-05 00:31:47,443 [INFO] core.trainer: Epoch-(4): [200/1000]	Time 0.522 (0.516)	Calc 0.454 (0.448)	Data 0.002 (0.001)	Loss 0.107 (0.120)	Acc@1 100.000 (99.600)
+2023-12-05 00:32:40,123 [INFO] core.trainer: Epoch-(4): [300/1000]	Time 0.525 (0.520)	Calc 0.456 (0.452)	Data 0.002 (0.001)	Loss 0.102 (0.121)	Acc@1 100.000 (99.578)
+2023-12-05 00:33:30,938 [INFO] core.trainer: Epoch-(4): [400/1000]	Time 0.531 (0.516)	Calc 0.463 (0.448)	Data 0.002 (0.001)	Loss 0.116 (0.118)	Acc@1 100.000 (99.617)
+2023-12-05 00:34:23,988 [INFO] core.trainer: Epoch-(4): [500/1000]	Time 0.528 (0.519)	Calc 0.460 (0.451)	Data 0.001 (0.001)	Loss 0.205 (0.117)	Acc@1 100.000 (99.616)
+2023-12-05 00:35:10,435 [INFO] core.trainer: Epoch-(4): [600/1000]	Time 0.475 (0.510)	Calc 0.407 (0.442)	Data 0.001 (0.001)	Loss 0.109 (0.115)	Acc@1 100.000 (99.642)
+2023-12-05 00:35:57,627 [INFO] core.trainer: Epoch-(4): [700/1000]	Time 0.506 (0.504)	Calc 0.438 (0.436)	Data 0.001 (0.001)	Loss 0.148 (0.114)	Acc@1 100.000 (99.646)
+2023-12-05 00:36:46,488 [INFO] core.trainer: Epoch-(4): [800/1000]	Time 0.564 (0.502)	Calc 0.498 (0.434)	Data 0.001 (0.001)	Loss 0.113 (0.113)	Acc@1 98.667 (99.642)
+2023-12-05 00:37:34,995 [INFO] core.trainer: Epoch-(4): [900/1000]	Time 0.478 (0.500)	Calc 0.407 (0.432)	Data 0.002 (0.001)	Loss 0.167 (0.113)	Acc@1 98.667 (99.636)
+2023-12-05 00:38:21,889 [INFO] core.trainer: Epoch-(4): [1000/1000]	Time 0.481 (0.497)	Calc 0.412 (0.428)	Data 0.001 (0.001)	Loss 0.112 (0.112)	Acc@1 100.000 (99.636)
+2023-12-05 00:38:21,894 [INFO] core.trainer:  * Acc@1 99.636 
+2023-12-05 00:38:21,897 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 00:38:30,049 [INFO] core.trainer: Epoch-(4): [100/1000]	Time 0.086 (0.081)	Calc 0.083 (0.078)	Data 0.001 (0.001)	Acc@1 88.000 (84.040)
+2023-12-05 00:38:38,137 [INFO] core.trainer: Epoch-(4): [200/1000]	Time 0.081 (0.081)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 92.000 (84.400)
+2023-12-05 00:38:46,213 [INFO] core.trainer: Epoch-(4): [300/1000]	Time 0.082 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (85.084)
+2023-12-05 00:38:54,294 [INFO] core.trainer: Epoch-(4): [400/1000]	Time 0.088 (0.080)	Calc 0.085 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (84.940)
+2023-12-05 00:39:02,466 [INFO] core.trainer: Epoch-(4): [500/1000]	Time 0.084 (0.081)	Calc 0.081 (0.077)	Data 0.001 (0.001)	Acc@1 93.333 (85.448)
+2023-12-05 00:39:10,573 [INFO] core.trainer: Epoch-(4): [600/1000]	Time 0.078 (0.081)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 82.667 (85.351)
+2023-12-05 00:39:18,638 [INFO] core.trainer: Epoch-(4): [700/1000]	Time 0.081 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 78.667 (85.312)
+2023-12-05 00:39:26,731 [INFO] core.trainer: Epoch-(4): [800/1000]	Time 0.081 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 72.000 (85.138)
+2023-12-05 00:39:34,863 [INFO] core.trainer: Epoch-(4): [900/1000]	Time 0.082 (0.080)	Calc 0.080 (0.077)	Data 0.001 (0.001)	Acc@1 80.000 (85.157)
+2023-12-05 00:39:42,969 [INFO] core.trainer: Epoch-(4): [1000/1000]	Time 0.083 (0.080)	Calc 0.078 (0.077)	Data 0.002 (0.001)	Acc@1 77.333 (85.045)
+2023-12-05 00:39:42,973 [INFO] core.trainer:  * Acc@1 85.045 Best acc 85.025
+2023-12-05 00:39:42,975 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 00:39:51,062 [INFO] core.trainer: Epoch-(4): [100/1000]	Time 0.081 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 88.000 (85.360)
+2023-12-05 00:39:59,218 [INFO] core.trainer: Epoch-(4): [200/1000]	Time 0.084 (0.081)	Calc 0.081 (0.077)	Data 0.001 (0.001)	Acc@1 74.667 (85.327)
+2023-12-05 00:40:07,327 [INFO] core.trainer: Epoch-(4): [300/1000]	Time 0.082 (0.081)	Calc 0.080 (0.077)	Data 0.001 (0.001)	Acc@1 93.333 (85.711)
+2023-12-05 00:40:15,442 [INFO] core.trainer: Epoch-(4): [400/1000]	Time 0.078 (0.081)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 86.667 (85.730)
+2023-12-05 00:40:23,591 [INFO] core.trainer: Epoch-(4): [500/1000]	Time 0.079 (0.081)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 86.667 (85.661)
+2023-12-05 00:40:31,680 [INFO] core.trainer: Epoch-(4): [600/1000]	Time 0.077 (0.081)	Calc 0.073 (0.077)	Data 0.001 (0.001)	Acc@1 72.000 (85.471)
+2023-12-05 00:40:39,767 [INFO] core.trainer: Epoch-(4): [700/1000]	Time 0.076 (0.081)	Calc 0.073 (0.077)	Data 0.001 (0.001)	Acc@1 92.000 (85.246)
+2023-12-05 00:40:47,848 [INFO] core.trainer: Epoch-(4): [800/1000]	Time 0.080 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 90.667 (85.302)
+2023-12-05 00:40:55,917 [INFO] core.trainer: Epoch-(4): [900/1000]	Time 0.077 (0.080)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 90.667 (85.299)
+2023-12-05 00:41:03,955 [INFO] core.trainer: Epoch-(4): [1000/1000]	Time 0.080 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 97.333 (85.365)
+2023-12-05 00:41:03,960 [INFO] core.trainer:  * Acc@1 85.365 Best acc 84.437
+2023-12-05 00:41:03,962 [INFO] core.trainer:  * Time: 0:52:27/1:44:54
+2023-12-05 00:41:04,577 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 00:41:04,580 [INFO] core.trainer: learning rate: [5e-06]
+2023-12-05 00:41:51,923 [INFO] core.trainer: Epoch-(5): [100/1000]	Time 0.474 (0.473)	Calc 0.404 (0.403)	Data 0.001 (0.001)	Loss 0.047 (0.099)	Acc@1 100.000 (99.653)
+2023-12-05 00:42:40,464 [INFO] core.trainer: Epoch-(5): [200/1000]	Time 0.518 (0.479)	Calc 0.449 (0.409)	Data 0.002 (0.001)	Loss 0.057 (0.100)	Acc@1 100.000 (99.680)
+2023-12-05 00:43:27,861 [INFO] core.trainer: Epoch-(5): [300/1000]	Time 0.423 (0.477)	Calc 0.353 (0.408)	Data 0.001 (0.001)	Loss 0.162 (0.100)	Acc@1 98.667 (99.662)
+2023-12-05 00:44:10,673 [INFO] core.trainer: Epoch-(5): [400/1000]	Time 0.413 (0.465)	Calc 0.341 (0.395)	Data 0.001 (0.001)	Loss 0.109 (0.102)	Acc@1 100.000 (99.653)
+2023-12-05 00:44:54,302 [INFO] core.trainer: Epoch-(5): [500/1000]	Time 0.418 (0.459)	Calc 0.346 (0.389)	Data 0.001 (0.001)	Loss 0.093 (0.101)	Acc@1 100.000 (99.629)
+2023-12-05 00:45:38,560 [INFO] core.trainer: Epoch-(5): [600/1000]	Time 0.469 (0.456)	Calc 0.398 (0.386)	Data 0.002 (0.001)	Loss 0.046 (0.101)	Acc@1 100.000 (99.620)
+2023-12-05 00:46:24,059 [INFO] core.trainer: Epoch-(5): [700/1000]	Time 0.422 (0.456)	Calc 0.353 (0.386)	Data 0.002 (0.001)	Loss 0.160 (0.101)	Acc@1 97.333 (99.615)
+2023-12-05 00:47:11,129 [INFO] core.trainer: Epoch-(5): [800/1000]	Time 0.510 (0.458)	Calc 0.440 (0.388)	Data 0.001 (0.001)	Loss 0.112 (0.101)	Acc@1 100.000 (99.627)
+2023-12-05 00:48:00,167 [INFO] core.trainer: Epoch-(5): [900/1000]	Time 0.468 (0.461)	Calc 0.397 (0.392)	Data 0.001 (0.001)	Loss 0.147 (0.101)	Acc@1 100.000 (99.622)
+2023-12-05 00:48:49,738 [INFO] core.trainer: Epoch-(5): [1000/1000]	Time 0.507 (0.465)	Calc 0.439 (0.395)	Data 0.001 (0.001)	Loss 0.131 (0.101)	Acc@1 98.667 (99.624)
+2023-12-05 00:48:49,743 [INFO] core.trainer:  * Acc@1 99.624 
+2023-12-05 00:48:49,745 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 00:48:57,802 [INFO] core.trainer: Epoch-(5): [100/1000]	Time 0.078 (0.080)	Calc 0.075 (0.076)	Data 0.001 (0.001)	Acc@1 78.667 (85.520)
+2023-12-05 00:49:05,731 [INFO] core.trainer: Epoch-(5): [200/1000]	Time 0.078 (0.079)	Calc 0.075 (0.076)	Data 0.001 (0.001)	Acc@1 89.333 (84.353)
+2023-12-05 00:49:13,741 [INFO] core.trainer: Epoch-(5): [300/1000]	Time 0.080 (0.079)	Calc 0.077 (0.076)	Data 0.001 (0.001)	Acc@1 96.000 (84.711)
+2023-12-05 00:49:21,703 [INFO] core.trainer: Epoch-(5): [400/1000]	Time 0.079 (0.079)	Calc 0.076 (0.076)	Data 0.001 (0.001)	Acc@1 86.667 (84.873)
+2023-12-05 00:49:29,634 [INFO] core.trainer: Epoch-(5): [500/1000]	Time 0.079 (0.079)	Calc 0.076 (0.076)	Data 0.001 (0.001)	Acc@1 92.000 (85.349)
+2023-12-05 00:49:37,584 [INFO] core.trainer: Epoch-(5): [600/1000]	Time 0.076 (0.079)	Calc 0.073 (0.076)	Data 0.001 (0.001)	Acc@1 84.000 (85.400)
+2023-12-05 00:49:45,686 [INFO] core.trainer: Epoch-(5): [700/1000]	Time 0.078 (0.079)	Calc 0.075 (0.076)	Data 0.001 (0.001)	Acc@1 93.333 (85.387)
+2023-12-05 00:49:53,744 [INFO] core.trainer: Epoch-(5): [800/1000]	Time 0.081 (0.079)	Calc 0.078 (0.076)	Data 0.001 (0.001)	Acc@1 77.333 (85.235)
+2023-12-05 00:50:01,885 [INFO] core.trainer: Epoch-(5): [900/1000]	Time 0.081 (0.080)	Calc 0.078 (0.076)	Data 0.001 (0.001)	Acc@1 82.667 (85.225)
+2023-12-05 00:50:10,010 [INFO] core.trainer: Epoch-(5): [1000/1000]	Time 0.079 (0.080)	Calc 0.076 (0.076)	Data 0.001 (0.001)	Acc@1 98.667 (85.177)
+2023-12-05 00:50:10,014 [INFO] core.trainer:  * Acc@1 85.177 Best acc 85.045
+2023-12-05 00:50:10,016 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 00:50:18,105 [INFO] core.trainer: Epoch-(5): [100/1000]	Time 0.082 (0.080)	Calc 0.079 (0.077)	Data 0.001 (0.001)	Acc@1 72.000 (83.973)
+2023-12-05 00:50:26,201 [INFO] core.trainer: Epoch-(5): [200/1000]	Time 0.077 (0.080)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 89.333 (84.160)
+2023-12-05 00:50:34,351 [INFO] core.trainer: Epoch-(5): [300/1000]	Time 0.084 (0.081)	Calc 0.080 (0.077)	Data 0.002 (0.001)	Acc@1 82.667 (84.649)
+2023-12-05 00:50:42,404 [INFO] core.trainer: Epoch-(5): [400/1000]	Time 0.083 (0.080)	Calc 0.080 (0.077)	Data 0.001 (0.001)	Acc@1 94.667 (84.713)
+2023-12-05 00:50:50,505 [INFO] core.trainer: Epoch-(5): [500/1000]	Time 0.081 (0.080)	Calc 0.078 (0.077)	Data 0.001 (0.001)	Acc@1 92.000 (84.776)
+2023-12-05 00:50:58,658 [INFO] core.trainer: Epoch-(5): [600/1000]	Time 0.079 (0.080)	Calc 0.075 (0.077)	Data 0.002 (0.001)	Acc@1 85.333 (84.876)
+2023-12-05 00:51:06,784 [INFO] core.trainer: Epoch-(5): [700/1000]	Time 0.083 (0.080)	Calc 0.079 (0.077)	Data 0.001 (0.001)	Acc@1 92.000 (85.069)
+2023-12-05 00:51:14,932 [INFO] core.trainer: Epoch-(5): [800/1000]	Time 0.077 (0.081)	Calc 0.073 (0.077)	Data 0.001 (0.001)	Acc@1 84.000 (85.120)
+2023-12-05 00:51:22,992 [INFO] core.trainer: Epoch-(5): [900/1000]	Time 0.079 (0.080)	Calc 0.075 (0.077)	Data 0.002 (0.001)	Acc@1 90.667 (85.181)
+2023-12-05 00:51:30,925 [INFO] core.trainer: Epoch-(5): [1000/1000]	Time 0.080 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 89.333 (85.137)
+2023-12-05 00:51:30,930 [INFO] core.trainer:  * Acc@1 85.137 Best acc 85.365
+2023-12-05 00:51:30,933 [INFO] core.trainer:  * Time: 1:02:54/1:44:50
+2023-12-05 00:51:31,579 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 00:51:31,581 [INFO] core.trainer: learning rate: [5e-06]
+2023-12-05 00:52:24,071 [INFO] core.trainer: Epoch-(6): [100/1000]	Time 0.517 (0.524)	Calc 0.448 (0.457)	Data 0.001 (0.001)	Loss 0.101 (0.101)	Acc@1 100.000 (99.680)
+2023-12-05 00:53:16,832 [INFO] core.trainer: Epoch-(6): [200/1000]	Time 0.517 (0.526)	Calc 0.449 (0.458)	Data 0.002 (0.001)	Loss 0.088 (0.099)	Acc@1 100.000 (99.667)
+2023-12-05 00:54:03,626 [INFO] core.trainer: Epoch-(6): [300/1000]	Time 0.421 (0.506)	Calc 0.349 (0.438)	Data 0.002 (0.001)	Loss 0.060 (0.100)	Acc@1 100.000 (99.680)
+2023-12-05 00:54:51,233 [INFO] core.trainer: Epoch-(6): [400/1000]	Time 0.482 (0.498)	Calc 0.412 (0.430)	Data 0.001 (0.001)	Loss 0.107 (0.100)	Acc@1 100.000 (99.657)
+2023-12-05 00:55:37,938 [INFO] core.trainer: Epoch-(6): [500/1000]	Time 0.482 (0.492)	Calc 0.412 (0.423)	Data 0.001 (0.001)	Loss 0.078 (0.100)	Acc@1 100.000 (99.643)
+2023-12-05 00:56:27,157 [INFO] core.trainer: Epoch-(6): [600/1000]	Time 0.513 (0.492)	Calc 0.442 (0.423)	Data 0.002 (0.001)	Loss 0.071 (0.100)	Acc@1 100.000 (99.644)
+2023-12-05 00:57:15,398 [INFO] core.trainer: Epoch-(6): [700/1000]	Time 0.444 (0.491)	Calc 0.375 (0.422)	Data 0.002 (0.001)	Loss 0.121 (0.100)	Acc@1 100.000 (99.672)
+2023-12-05 00:58:00,353 [INFO] core.trainer: Epoch-(6): [800/1000]	Time 0.470 (0.485)	Calc 0.405 (0.417)	Data 0.001 (0.001)	Loss 0.092 (0.100)	Acc@1 100.000 (99.678)
+2023-12-05 00:58:48,499 [INFO] core.trainer: Epoch-(6): [900/1000]	Time 0.483 (0.485)	Calc 0.413 (0.416)	Data 0.001 (0.001)	Loss 0.030 (0.099)	Acc@1 100.000 (99.689)
+2023-12-05 00:59:36,807 [INFO] core.trainer: Epoch-(6): [1000/1000]	Time 0.486 (0.485)	Calc 0.416 (0.416)	Data 0.001 (0.001)	Loss 0.073 (0.099)	Acc@1 100.000 (99.681)
+2023-12-05 00:59:36,811 [INFO] core.trainer:  * Acc@1 99.681 
+2023-12-05 00:59:36,813 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 00:59:44,956 [INFO] core.trainer: Epoch-(6): [100/1000]	Time 0.078 (0.081)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 92.000 (84.760)
+2023-12-05 00:59:52,946 [INFO] core.trainer: Epoch-(6): [200/1000]	Time 0.077 (0.080)	Calc 0.074 (0.077)	Data 0.001 (0.001)	Acc@1 97.333 (84.940)
+2023-12-05 01:00:01,150 [INFO] core.trainer: Epoch-(6): [300/1000]	Time 0.079 (0.081)	Calc 0.075 (0.077)	Data 0.001 (0.001)	Acc@1 85.333 (84.582)
+2023-12-05 01:00:09,326 [INFO] core.trainer: Epoch-(6): [400/1000]	Time 0.080 (0.081)	Calc 0.075 (0.077)	Data 0.002 (0.001)	Acc@1 76.000 (84.520)
+2023-12-05 01:00:17,557 [INFO] core.trainer: Epoch-(6): [500/1000]	Time 0.078 (0.081)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 90.667 (84.680)
+2023-12-05 01:00:25,592 [INFO] core.trainer: Epoch-(6): [600/1000]	Time 0.080 (0.081)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 93.333 (84.698)
+2023-12-05 01:00:33,853 [INFO] core.trainer: Epoch-(6): [700/1000]	Time 0.076 (0.081)	Calc 0.073 (0.078)	Data 0.001 (0.001)	Acc@1 96.000 (84.743)
+2023-12-05 01:00:42,040 [INFO] core.trainer: Epoch-(6): [800/1000]	Time 0.083 (0.081)	Calc 0.079 (0.078)	Data 0.001 (0.001)	Acc@1 82.667 (84.663)
+2023-12-05 01:00:50,297 [INFO] core.trainer: Epoch-(6): [900/1000]	Time 0.085 (0.081)	Calc 0.082 (0.078)	Data 0.001 (0.001)	Acc@1 90.667 (84.662)
+2023-12-05 01:00:58,466 [INFO] core.trainer: Epoch-(6): [1000/1000]	Time 0.081 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 80.000 (84.588)
+2023-12-05 01:00:58,470 [INFO] core.trainer:  * Acc@1 84.588 Best acc 85.177
+2023-12-05 01:00:58,472 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 01:01:06,724 [INFO] core.trainer: Epoch-(6): [100/1000]	Time 0.085 (0.082)	Calc 0.081 (0.078)	Data 0.001 (0.001)	Acc@1 96.000 (83.480)
+2023-12-05 01:01:14,960 [INFO] core.trainer: Epoch-(6): [200/1000]	Time 0.083 (0.082)	Calc 0.080 (0.078)	Data 0.001 (0.001)	Acc@1 90.667 (83.553)
+2023-12-05 01:01:23,121 [INFO] core.trainer: Epoch-(6): [300/1000]	Time 0.085 (0.082)	Calc 0.082 (0.078)	Data 0.001 (0.001)	Acc@1 93.333 (83.987)
+2023-12-05 01:01:31,382 [INFO] core.trainer: Epoch-(6): [400/1000]	Time 0.085 (0.082)	Calc 0.082 (0.078)	Data 0.001 (0.001)	Acc@1 81.333 (84.437)
+2023-12-05 01:01:39,617 [INFO] core.trainer: Epoch-(6): [500/1000]	Time 0.083 (0.082)	Calc 0.078 (0.078)	Data 0.002 (0.001)	Acc@1 97.333 (84.355)
+2023-12-05 01:01:47,912 [INFO] core.trainer: Epoch-(6): [600/1000]	Time 0.080 (0.082)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 82.667 (84.562)
+2023-12-05 01:01:56,065 [INFO] core.trainer: Epoch-(6): [700/1000]	Time 0.079 (0.082)	Calc 0.076 (0.078)	Data 0.001 (0.001)	Acc@1 80.000 (84.432)
+2023-12-05 01:02:04,255 [INFO] core.trainer: Epoch-(6): [800/1000]	Time 0.084 (0.082)	Calc 0.080 (0.078)	Data 0.001 (0.001)	Acc@1 90.667 (84.365)
+2023-12-05 01:02:12,477 [INFO] core.trainer: Epoch-(6): [900/1000]	Time 0.081 (0.082)	Calc 0.078 (0.078)	Data 0.001 (0.001)	Acc@1 92.000 (84.659)
+2023-12-05 01:02:20,686 [INFO] core.trainer: Epoch-(6): [1000/1000]	Time 0.081 (0.082)	Calc 0.079 (0.078)	Data 0.001 (0.001)	Acc@1 93.333 (84.677)
+2023-12-05 01:02:20,691 [INFO] core.trainer:  * Acc@1 84.677 Best acc 85.137
+2023-12-05 01:02:20,693 [INFO] core.trainer:  * Time: 1:13:43/1:45:18.571429
+2023-12-05 01:02:21,134 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 01:02:21,137 [INFO] core.trainer: learning rate: [5e-06]
+2023-12-05 01:03:09,656 [INFO] core.trainer: Epoch-(7): [100/1000]	Time 0.530 (0.485)	Calc 0.462 (0.416)	Data 0.001 (0.001)	Loss 0.094 (0.100)	Acc@1 100.000 (99.653)
+2023-12-05 01:04:01,595 [INFO] core.trainer: Epoch-(7): [200/1000]	Time 0.507 (0.502)	Calc 0.438 (0.433)	Data 0.002 (0.001)	Loss 0.065 (0.101)	Acc@1 100.000 (99.593)
+2023-12-05 01:04:51,542 [INFO] core.trainer: Epoch-(7): [300/1000]	Time 0.471 (0.501)	Calc 0.402 (0.432)	Data 0.001 (0.001)	Loss 0.071 (0.099)	Acc@1 100.000 (99.587)
+2023-12-05 01:05:40,633 [INFO] core.trainer: Epoch-(7): [400/1000]	Time 0.485 (0.498)	Calc 0.414 (0.429)	Data 0.001 (0.001)	Loss 0.114 (0.099)	Acc@1 100.000 (99.600)
+2023-12-05 01:06:29,522 [INFO] core.trainer: Epoch-(7): [500/1000]	Time 0.516 (0.496)	Calc 0.449 (0.427)	Data 0.001 (0.001)	Loss 0.046 (0.100)	Acc@1 100.000 (99.600)
+2023-12-05 01:07:18,944 [INFO] core.trainer: Epoch-(7): [600/1000]	Time 0.512 (0.496)	Calc 0.443 (0.427)	Data 0.002 (0.001)	Loss 0.220 (0.100)	Acc@1 98.667 (99.611)
+2023-12-05 01:08:08,705 [INFO] core.trainer: Epoch-(7): [700/1000]	Time 0.529 (0.496)	Calc 0.459 (0.427)	Data 0.001 (0.001)	Loss 0.086 (0.099)	Acc@1 100.000 (99.613)
+2023-12-05 01:08:58,349 [INFO] core.trainer: Epoch-(7): [800/1000]	Time 0.508 (0.496)	Calc 0.439 (0.427)	Data 0.002 (0.001)	Loss 0.106 (0.098)	Acc@1 98.667 (99.642)
+2023-12-05 01:09:49,711 [INFO] core.trainer: Epoch-(7): [900/1000]	Time 0.510 (0.498)	Calc 0.442 (0.429)	Data 0.001 (0.001)	Loss 0.071 (0.098)	Acc@1 100.000 (99.649)
+2023-12-05 01:10:36,712 [INFO] core.trainer: Epoch-(7): [1000/1000]	Time 0.477 (0.495)	Calc 0.407 (0.426)	Data 0.001 (0.001)	Loss 0.149 (0.098)	Acc@1 98.667 (99.657)
+2023-12-05 01:10:36,716 [INFO] core.trainer:  * Acc@1 99.657 
+2023-12-05 01:10:36,718 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 01:10:44,899 [INFO] core.trainer: Epoch-(7): [100/1000]	Time 0.080 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 90.667 (85.267)
+2023-12-05 01:10:53,443 [INFO] core.trainer: Epoch-(7): [200/1000]	Time 0.076 (0.083)	Calc 0.074 (0.080)	Data 0.001 (0.001)	Acc@1 90.667 (85.733)
+2023-12-05 01:11:01,633 [INFO] core.trainer: Epoch-(7): [300/1000]	Time 0.079 (0.082)	Calc 0.076 (0.079)	Data 0.001 (0.001)	Acc@1 85.333 (85.973)
+2023-12-05 01:11:10,346 [INFO] core.trainer: Epoch-(7): [400/1000]	Time 0.085 (0.083)	Calc 0.080 (0.080)	Data 0.002 (0.001)	Acc@1 61.333 (85.620)
+2023-12-05 01:11:19,309 [INFO] core.trainer: Epoch-(7): [500/1000]	Time 0.087 (0.085)	Calc 0.083 (0.081)	Data 0.001 (0.001)	Acc@1 90.667 (85.595)
+2023-12-05 01:11:28,308 [INFO] core.trainer: Epoch-(7): [600/1000]	Time 0.089 (0.085)	Calc 0.085 (0.082)	Data 0.001 (0.001)	Acc@1 74.667 (85.629)
+2023-12-05 01:11:37,422 [INFO] core.trainer: Epoch-(7): [700/1000]	Time 0.083 (0.086)	Calc 0.080 (0.083)	Data 0.001 (0.001)	Acc@1 94.667 (85.455)
+2023-12-05 01:11:46,002 [INFO] core.trainer: Epoch-(7): [800/1000]	Time 0.084 (0.086)	Calc 0.081 (0.082)	Data 0.001 (0.001)	Acc@1 74.667 (85.357)
+2023-12-05 01:11:54,540 [INFO] core.trainer: Epoch-(7): [900/1000]	Time 0.088 (0.086)	Calc 0.084 (0.082)	Data 0.001 (0.001)	Acc@1 93.333 (85.293)
+2023-12-05 01:12:03,592 [INFO] core.trainer: Epoch-(7): [1000/1000]	Time 0.081 (0.086)	Calc 0.078 (0.083)	Data 0.001 (0.001)	Acc@1 77.333 (85.260)
+2023-12-05 01:12:03,596 [INFO] core.trainer:  * Acc@1 85.260 Best acc 85.177
+2023-12-05 01:12:03,598 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 01:12:12,022 [INFO] core.trainer: Epoch-(7): [100/1000]	Time 0.085 (0.084)	Calc 0.081 (0.080)	Data 0.001 (0.001)	Acc@1 81.333 (84.800)
+2023-12-05 01:12:21,035 [INFO] core.trainer: Epoch-(7): [200/1000]	Time 0.093 (0.087)	Calc 0.089 (0.083)	Data 0.001 (0.001)	Acc@1 92.000 (84.680)
+2023-12-05 01:12:30,049 [INFO] core.trainer: Epoch-(7): [300/1000]	Time 0.086 (0.088)	Calc 0.082 (0.084)	Data 0.001 (0.001)	Acc@1 85.333 (84.973)
+2023-12-05 01:12:38,653 [INFO] core.trainer: Epoch-(7): [400/1000]	Time 0.080 (0.087)	Calc 0.078 (0.083)	Data 0.001 (0.001)	Acc@1 92.000 (85.093)
+2023-12-05 01:12:46,868 [INFO] core.trainer: Epoch-(7): [500/1000]	Time 0.080 (0.086)	Calc 0.076 (0.082)	Data 0.002 (0.001)	Acc@1 90.667 (84.928)
+2023-12-05 01:12:55,145 [INFO] core.trainer: Epoch-(7): [600/1000]	Time 0.082 (0.085)	Calc 0.079 (0.082)	Data 0.001 (0.001)	Acc@1 85.333 (85.104)
+2023-12-05 01:13:03,475 [INFO] core.trainer: Epoch-(7): [700/1000]	Time 0.086 (0.085)	Calc 0.083 (0.081)	Data 0.001 (0.001)	Acc@1 89.333 (85.185)
+2023-12-05 01:13:11,787 [INFO] core.trainer: Epoch-(7): [800/1000]	Time 0.080 (0.085)	Calc 0.076 (0.081)	Data 0.001 (0.001)	Acc@1 93.333 (85.138)
+2023-12-05 01:13:19,994 [INFO] core.trainer: Epoch-(7): [900/1000]	Time 0.080 (0.084)	Calc 0.077 (0.081)	Data 0.001 (0.001)	Acc@1 80.000 (85.138)
+2023-12-05 01:13:28,237 [INFO] core.trainer: Epoch-(7): [1000/1000]	Time 0.082 (0.084)	Calc 0.078 (0.081)	Data 0.001 (0.001)	Acc@1 88.000 (85.123)
+2023-12-05 01:13:28,242 [INFO] core.trainer:  * Acc@1 85.123 Best acc 85.137
+2023-12-05 01:13:28,244 [INFO] core.trainer:  * Time: 1:24:51/1:46:03.750000
+2023-12-05 01:13:29,002 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 01:13:29,005 [INFO] core.trainer: learning rate: [5e-06]
+2023-12-05 01:14:21,840 [INFO] core.trainer: Epoch-(8): [100/1000]	Time 0.479 (0.528)	Calc 0.409 (0.459)	Data 0.001 (0.001)	Loss 0.095 (0.097)	Acc@1 100.000 (99.520)
+2023-12-05 01:15:07,132 [INFO] core.trainer: Epoch-(8): [200/1000]	Time 0.498 (0.490)	Calc 0.430 (0.421)	Data 0.001 (0.001)	Loss 0.111 (0.098)	Acc@1 100.000 (99.580)
+2023-12-05 01:15:54,206 [INFO] core.trainer: Epoch-(8): [300/1000]	Time 0.483 (0.483)	Calc 0.414 (0.414)	Data 0.001 (0.001)	Loss 0.090 (0.099)	Acc@1 100.000 (99.587)
+2023-12-05 01:16:40,490 [INFO] core.trainer: Epoch-(8): [400/1000]	Time 0.484 (0.478)	Calc 0.414 (0.409)	Data 0.001 (0.001)	Loss 0.118 (0.100)	Acc@1 98.667 (99.560)
+2023-12-05 01:17:28,602 [INFO] core.trainer: Epoch-(8): [500/1000]	Time 0.483 (0.479)	Calc 0.416 (0.409)	Data 0.002 (0.001)	Loss 0.157 (0.099)	Acc@1 97.333 (99.608)
+2023-12-05 01:18:17,647 [INFO] core.trainer: Epoch-(8): [600/1000]	Time 0.429 (0.480)	Calc 0.360 (0.411)	Data 0.001 (0.001)	Loss 0.052 (0.098)	Acc@1 100.000 (99.607)
+2023-12-05 01:19:02,875 [INFO] core.trainer: Epoch-(8): [700/1000]	Time 0.473 (0.476)	Calc 0.403 (0.407)	Data 0.001 (0.001)	Loss 0.077 (0.099)	Acc@1 100.000 (99.615)
+2023-12-05 01:19:49,528 [INFO] core.trainer: Epoch-(8): [800/1000]	Time 0.420 (0.475)	Calc 0.349 (0.406)	Data 0.001 (0.001)	Loss 0.101 (0.099)	Acc@1 100.000 (99.607)
+2023-12-05 01:20:33,935 [INFO] core.trainer: Epoch-(8): [900/1000]	Time 0.481 (0.472)	Calc 0.410 (0.402)	Data 0.001 (0.001)	Loss 0.052 (0.099)	Acc@1 100.000 (99.600)
+2023-12-05 01:21:20,584 [INFO] core.trainer: Epoch-(8): [1000/1000]	Time 0.485 (0.471)	Calc 0.415 (0.402)	Data 0.001 (0.001)	Loss 0.093 (0.099)	Acc@1 100.000 (99.604)
+2023-12-05 01:21:20,590 [INFO] core.trainer:  * Acc@1 99.604 
+2023-12-05 01:21:20,592 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 01:21:28,693 [INFO] core.trainer: Epoch-(8): [100/1000]	Time 0.081 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 86.667 (85.600)
+2023-12-05 01:21:36,687 [INFO] core.trainer: Epoch-(8): [200/1000]	Time 0.079 (0.080)	Calc 0.076 (0.077)	Data 0.001 (0.001)	Acc@1 82.667 (84.860)
+2023-12-05 01:21:44,805 [INFO] core.trainer: Epoch-(8): [300/1000]	Time 0.081 (0.080)	Calc 0.077 (0.077)	Data 0.001 (0.001)	Acc@1 69.333 (84.956)
+2023-12-05 01:21:53,036 [INFO] core.trainer: Epoch-(8): [400/1000]	Time 0.083 (0.081)	Calc 0.080 (0.077)	Data 0.001 (0.001)	Acc@1 98.667 (84.977)
+2023-12-05 01:22:01,280 [INFO] core.trainer: Epoch-(8): [500/1000]	Time 0.081 (0.081)	Calc 0.078 (0.078)	Data 0.001 (0.001)	Acc@1 69.333 (84.957)
+2023-12-05 01:22:09,657 [INFO] core.trainer: Epoch-(8): [600/1000]	Time 0.081 (0.081)	Calc 0.077 (0.078)	Data 0.002 (0.001)	Acc@1 90.667 (84.971)
+2023-12-05 01:22:17,821 [INFO] core.trainer: Epoch-(8): [700/1000]	Time 0.080 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 93.333 (85.051)
+2023-12-05 01:22:26,004 [INFO] core.trainer: Epoch-(8): [800/1000]	Time 0.079 (0.081)	Calc 0.076 (0.078)	Data 0.001 (0.001)	Acc@1 89.333 (85.065)
+2023-12-05 01:22:34,285 [INFO] core.trainer: Epoch-(8): [900/1000]	Time 0.083 (0.081)	Calc 0.078 (0.078)	Data 0.001 (0.001)	Acc@1 96.000 (85.067)
+2023-12-05 01:22:42,487 [INFO] core.trainer: Epoch-(8): [1000/1000]	Time 0.080 (0.081)	Calc 0.078 (0.078)	Data 0.001 (0.001)	Acc@1 86.667 (84.960)
+2023-12-05 01:22:42,492 [INFO] core.trainer:  * Acc@1 84.960 Best acc 85.260
+2023-12-05 01:22:42,494 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 01:22:50,694 [INFO] core.trainer: Epoch-(8): [100/1000]	Time 0.080 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 82.667 (83.053)
+2023-12-05 01:22:58,893 [INFO] core.trainer: Epoch-(8): [200/1000]	Time 0.081 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 85.333 (83.813)
+2023-12-05 01:23:07,115 [INFO] core.trainer: Epoch-(8): [300/1000]	Time 0.081 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 90.667 (84.400)
+2023-12-05 01:23:15,257 [INFO] core.trainer: Epoch-(8): [400/1000]	Time 0.079 (0.081)	Calc 0.076 (0.078)	Data 0.001 (0.001)	Acc@1 90.667 (84.953)
+2023-12-05 01:23:23,366 [INFO] core.trainer: Epoch-(8): [500/1000]	Time 0.081 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 81.333 (85.069)
+2023-12-05 01:23:31,474 [INFO] core.trainer: Epoch-(8): [600/1000]	Time 0.083 (0.081)	Calc 0.080 (0.078)	Data 0.001 (0.001)	Acc@1 62.667 (85.082)
+2023-12-05 01:23:39,791 [INFO] core.trainer: Epoch-(8): [700/1000]	Time 0.085 (0.081)	Calc 0.081 (0.078)	Data 0.001 (0.001)	Acc@1 88.000 (85.101)
+2023-12-05 01:23:48,232 [INFO] core.trainer: Epoch-(8): [800/1000]	Time 0.081 (0.082)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 89.333 (85.052)
+2023-12-05 01:23:56,583 [INFO] core.trainer: Epoch-(8): [900/1000]	Time 0.080 (0.082)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 65.333 (85.081)
+2023-12-05 01:24:04,880 [INFO] core.trainer: Epoch-(8): [1000/1000]	Time 0.083 (0.082)	Calc 0.079 (0.078)	Data 0.001 (0.001)	Acc@1 73.333 (85.159)
+2023-12-05 01:24:04,885 [INFO] core.trainer:  * Acc@1 85.159 Best acc 85.123
+2023-12-05 01:24:04,887 [INFO] core.trainer:  * Time: 1:35:27/1:46:03.333333
+2023-12-05 01:24:05,342 [INFO] core.trainer: ============ Train on the train set ============
+2023-12-05 01:24:05,344 [INFO] core.trainer: learning rate: [5e-06]
+2023-12-05 01:24:54,874 [INFO] core.trainer: Epoch-(9): [100/1000]	Time 0.536 (0.495)	Calc 0.468 (0.426)	Data 0.001 (0.001)	Loss 0.056 (0.098)	Acc@1 100.000 (99.613)
+2023-12-05 01:25:44,590 [INFO] core.trainer: Epoch-(9): [200/1000]	Time 0.520 (0.496)	Calc 0.450 (0.427)	Data 0.001 (0.001)	Loss 0.115 (0.098)	Acc@1 100.000 (99.567)
+2023-12-05 01:26:31,125 [INFO] core.trainer: Epoch-(9): [300/1000]	Time 0.541 (0.485)	Calc 0.470 (0.416)	Data 0.002 (0.001)	Loss 0.088 (0.098)	Acc@1 100.000 (99.622)
+2023-12-05 01:27:19,455 [INFO] core.trainer: Epoch-(9): [400/1000]	Time 0.515 (0.485)	Calc 0.444 (0.415)	Data 0.001 (0.001)	Loss 0.173 (0.097)	Acc@1 100.000 (99.613)
+2023-12-05 01:28:05,420 [INFO] core.trainer: Epoch-(9): [500/1000]	Time 0.528 (0.480)	Calc 0.458 (0.410)	Data 0.001 (0.001)	Loss 0.110 (0.098)	Acc@1 100.000 (99.611)
+2023-12-05 01:28:54,442 [INFO] core.trainer: Epoch-(9): [600/1000]	Time 0.489 (0.481)	Calc 0.419 (0.412)	Data 0.001 (0.001)	Loss 0.093 (0.097)	Acc@1 100.000 (99.627)
+2023-12-05 01:29:40,261 [INFO] core.trainer: Epoch-(9): [700/1000]	Time 0.481 (0.478)	Calc 0.410 (0.409)	Data 0.002 (0.001)	Loss 0.123 (0.097)	Acc@1 100.000 (99.621)
+2023-12-05 01:30:30,129 [INFO] core.trainer: Epoch-(9): [800/1000]	Time 0.426 (0.480)	Calc 0.357 (0.411)	Data 0.001 (0.001)	Loss 0.066 (0.096)	Acc@1 100.000 (99.627)
+2023-12-05 01:31:16,831 [INFO] core.trainer: Epoch-(9): [900/1000]	Time 0.471 (0.479)	Calc 0.401 (0.410)	Data 0.001 (0.001)	Loss 0.088 (0.096)	Acc@1 100.000 (99.625)
+2023-12-05 01:32:01,243 [INFO] core.trainer: Epoch-(9): [1000/1000]	Time 0.477 (0.475)	Calc 0.407 (0.406)	Data 0.001 (0.001)	Loss 0.072 (0.096)	Acc@1 100.000 (99.627)
+2023-12-05 01:32:01,248 [INFO] core.trainer:  * Acc@1 99.627 
+2023-12-05 01:32:01,250 [INFO] core.trainer: ============ Validation on the val set ============
+2023-12-05 01:32:09,797 [INFO] core.trainer: Epoch-(9): [100/1000]	Time 0.096 (0.085)	Calc 0.091 (0.081)	Data 0.001 (0.001)	Acc@1 82.667 (84.013)
+2023-12-05 01:32:19,050 [INFO] core.trainer: Epoch-(9): [200/1000]	Time 0.095 (0.088)	Calc 0.091 (0.085)	Data 0.002 (0.001)	Acc@1 85.333 (84.787)
+2023-12-05 01:32:28,264 [INFO] core.trainer: Epoch-(9): [300/1000]	Time 0.084 (0.089)	Calc 0.081 (0.086)	Data 0.001 (0.001)	Acc@1 80.000 (84.876)
+2023-12-05 01:32:37,481 [INFO] core.trainer: Epoch-(9): [400/1000]	Time 0.081 (0.090)	Calc 0.077 (0.086)	Data 0.002 (0.001)	Acc@1 88.000 (85.197)
+2023-12-05 01:32:46,429 [INFO] core.trainer: Epoch-(9): [500/1000]	Time 0.093 (0.090)	Calc 0.089 (0.086)	Data 0.001 (0.001)	Acc@1 69.333 (85.467)
+2023-12-05 01:32:54,806 [INFO] core.trainer: Epoch-(9): [600/1000]	Time 0.079 (0.089)	Calc 0.076 (0.085)	Data 0.001 (0.001)	Acc@1 96.000 (85.378)
+2023-12-05 01:33:03,036 [INFO] core.trainer: Epoch-(9): [700/1000]	Time 0.080 (0.088)	Calc 0.077 (0.084)	Data 0.001 (0.001)	Acc@1 97.333 (85.072)
+2023-12-05 01:33:11,359 [INFO] core.trainer: Epoch-(9): [800/1000]	Time 0.086 (0.087)	Calc 0.082 (0.083)	Data 0.001 (0.001)	Acc@1 94.667 (85.053)
+2023-12-05 01:33:19,599 [INFO] core.trainer: Epoch-(9): [900/1000]	Time 0.081 (0.086)	Calc 0.078 (0.083)	Data 0.001 (0.001)	Acc@1 82.667 (85.061)
+2023-12-05 01:33:27,822 [INFO] core.trainer: Epoch-(9): [1000/1000]	Time 0.083 (0.086)	Calc 0.080 (0.082)	Data 0.001 (0.001)	Acc@1 94.667 (85.059)
+2023-12-05 01:33:27,826 [INFO] core.trainer:  * Acc@1 85.059 Best acc 85.260
+2023-12-05 01:33:27,828 [INFO] core.trainer: ============ Testing on the test set ============
+2023-12-05 01:33:36,083 [INFO] core.trainer: Epoch-(9): [100/1000]	Time 0.086 (0.082)	Calc 0.083 (0.079)	Data 0.001 (0.001)	Acc@1 89.333 (84.253)
+2023-12-05 01:33:44,322 [INFO] core.trainer: Epoch-(9): [200/1000]	Time 0.082 (0.082)	Calc 0.079 (0.079)	Data 0.001 (0.001)	Acc@1 74.667 (85.080)
+2023-12-05 01:33:52,572 [INFO] core.trainer: Epoch-(9): [300/1000]	Time 0.081 (0.082)	Calc 0.078 (0.079)	Data 0.001 (0.001)	Acc@1 85.333 (85.391)
+2023-12-05 01:34:00,699 [INFO] core.trainer: Epoch-(9): [400/1000]	Time 0.080 (0.082)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 89.333 (85.147)
+2023-12-05 01:34:08,859 [INFO] core.trainer: Epoch-(9): [500/1000]	Time 0.080 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 98.667 (85.216)
+2023-12-05 01:34:17,036 [INFO] core.trainer: Epoch-(9): [600/1000]	Time 0.081 (0.081)	Calc 0.077 (0.078)	Data 0.002 (0.001)	Acc@1 92.000 (84.956)
+2023-12-05 01:34:25,218 [INFO] core.trainer: Epoch-(9): [700/1000]	Time 0.082 (0.081)	Calc 0.079 (0.078)	Data 0.001 (0.001)	Acc@1 88.000 (84.804)
+2023-12-05 01:34:33,439 [INFO] core.trainer: Epoch-(9): [800/1000]	Time 0.081 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 93.333 (84.930)
+2023-12-05 01:34:41,589 [INFO] core.trainer: Epoch-(9): [900/1000]	Time 0.080 (0.081)	Calc 0.077 (0.078)	Data 0.001 (0.001)	Acc@1 74.667 (84.975)
+2023-12-05 01:34:49,787 [INFO] core.trainer: Epoch-(9): [1000/1000]	Time 0.084 (0.081)	Calc 0.081 (0.078)	Data 0.001 (0.001)	Acc@1 73.333 (85.055)
+2023-12-05 01:34:49,792 [INFO] core.trainer:  * Acc@1 85.055 Best acc 85.123
+2023-12-05 01:34:49,794 [INFO] core.trainer:  * Time: 1:46:12/1:46:12
+2023-12-05 01:34:50,296 [INFO] core.trainer: End of experiment, took 1:46:13
+2023-12-05 01:34:50,298 [INFO] core.trainer: Result DIR: ./results/ADM-WebCaricature-resnet12-5-1-Dec-04-2023-23-48-27
