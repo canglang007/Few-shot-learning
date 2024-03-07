@@ -1,0 +1,80 @@
+augment: true
+augment_method: DeepBdcAugment
+augment_times: 2
+augment_times_query: 2
+backbone:
+  kwargs:
+    reduce_dim: 640
+  name: resnet12Bdc
+batch_size: 64
+classifier:
+  kwargs:
+    classifier_path: null
+    dropout_rate: 0.8
+    emb_func_path: null
+    is_distill: false
+    num_class: 200
+    reduce_dim: 640
+    val_type: meta
+  name: DeepBDC_Pretrain
+data_root: ./WebCaricature
+dataloader_num: 1
+deterministic: true
+device_ids: 0
+episode_size: 1
+epoch: 60
+image_size: 84
+includes:
+- headers/data.yaml
+- headers/device.yaml
+- headers/misc.yaml
+- headers/model.yaml
+- headers/optimizer.yaml
+log_interval: 100
+log_level: info
+log_name: null
+log_paramerter: false
+lr_scheduler:
+  kwargs:
+    gamma: 0.1
+    milestones:
+    - 35
+    - 45
+  name: MultiStepLR
+n_gpu: 1
+optimizer:
+  kwargs:
+    lr: 0.05
+    momentum: 0.9
+    nesterov: true
+    weight_decay: 0.0005
+  name: SGD
+  other:
+    emb_func.bdc_pool.temperature: 0.001
+parallel_part:
+- emb_func
+port: 38744
+pretrain_path: null
+query_num: 10
+rank: 0
+result_root: ./results
+resume: false
+save_interval: 10
+save_part:
+- emb_func
+- cls_classifier
+seed: 2147483647
+shot_num: 5
+tag: null
+tb_scale: 1.0
+test_episode: 1000
+test_epoch: 5
+test_query: 10
+test_shot: 5
+test_way: 5
+train_episode: 1000
+use_memory: false
+val_per_epoch: 1
+warmup: 0
+way_num: 5
+workers: 8
